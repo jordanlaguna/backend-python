@@ -1,4 +1,4 @@
-# 🐍 FastAPI Backend - Sistema de Usuarios y Personas
+# 🐍 FastAPI Backend - Sistema de Usuarios, Personas Ventas, Inventario y Facturación
 
 Este proyecto es un backend desarrollado con **FastAPI** y **MySQL**, que permite registrar personas junto con usuarios, realizar autenticación y consultar la información almacenada, por el momento he hecho esas funciones, pero sigo desarrollándolo en un sistema.
 
