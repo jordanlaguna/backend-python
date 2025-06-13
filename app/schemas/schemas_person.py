@@ -3,11 +3,11 @@ from pydantic import BaseModel
 class PersonRegister(BaseModel):
     # Person attributes
     birth_date: str
-    identification: int
+    identification: str
     name: str
     lastName: str
     secondName: str
-    telephone: int
+    telephone: str
 
     # User attributes
     email: str
@@ -16,11 +16,11 @@ class PersonRegister(BaseModel):
 class PersonUserInformation(BaseModel):
     id_person: int
     birth_date: str
-    identification: int
+    identification: str
     name: str
     lastName: str
     secondName: str
-    telephone: int
+    telephone: str
     id_user: int
     email: str
     
@@ -31,11 +31,11 @@ class PersonUserInformation(BaseModel):
 class PersonResponse(BaseModel):
     id_person: int
     birth_date: str
-    identification: int
+    identification: str
     name: str
     lastName: str
     secondName: str
-    telephone: int
+    telephone: str
     email: str
 
     model_config = {
