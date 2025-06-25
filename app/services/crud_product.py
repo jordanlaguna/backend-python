@@ -31,3 +31,7 @@ def get_all_products(db: Session):
         .join(Category, Product.category_id == Category.id)
         .all()
     )
+
+# Get a product by barcode
+def get_product_by_barcode(db: Session, barcode: str) -> Product | None:
+    return db.query(Product).filter(Product.barcode == barcode).first()
