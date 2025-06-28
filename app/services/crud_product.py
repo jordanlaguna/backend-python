@@ -33,5 +33,5 @@ def get_all_products(db: Session):
     )
 
 # Get a product by barcode
-def get_product_by_barcode(db: Session, barcode: str) -> Product | None:
-    return db.query(Product).filter(Product.barcode == barcode).first()
+def get_product_by_barcode(db: Session, name: str) -> Product | None:
+    return db.query(Product).filter(Product.name == name).first()

@@ -51,10 +51,10 @@ def get_all_products(db: Session = Depends(get_db)):
     
     return result
 
-# Get a product by barcode
-@router.get("/product/{barcode}", response_model=ProductResponse)
-def get_product_by_barcode(barcode: str, db: Session = Depends(get_db)):
-    product = crud_product.get_product_by_barcode(db=db, barcode=barcode)
+# Get a product by name
+@router.get("/product/{name}", response_model=ProductResponse)
+def get_product_by_barcode(name: str, db: Session = Depends(get_db)):
+    product = crud_product.get_product_by_barcode(db=db, name=name)
     if not product:
         raise HTTPException(status_code=404, detail="Producto no encontrado")
     return product
