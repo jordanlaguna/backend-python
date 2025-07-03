@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database.database import SessionLocal
 
-roueter = APIRouter()
+router = APIRouter()
 
 # Create to connect to the database
 
@@ -17,14 +17,14 @@ def get_db_session():
         db.close()
 
 # Register a new category
-@roueter.post("/register_category", response_model=AddCategories)
+@router.post("/register_category", response_model=AddCategories)
 def register_category(category: CategoryRegister, db: Session = Depends(get_db_session)):
     existing_category = db.query(Category).filter(Category.name == category.name).first()
     if existing_category:
         raise HTTPException(status_code=400, detail="Categoría ya registrada con este nombre.")
     return create_category(db=db, category=category)
 
-# Get a list of all categories 
-@roueter.get("/categories_list", response_model=list[CategoryResponse])
+# Get a list of all categories
+@router.get("/categories_list", response_model=list[CategoryResponse])
 def list_categories(db: Session = Depends(get_db_session)):
     return get_all_categories(db=db)

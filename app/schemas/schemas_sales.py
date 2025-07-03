@@ -2,6 +2,11 @@ from pydantic import BaseModel
 import datetime
 from decimal import Decimal
 
+class ProductSale(BaseModel):
+    id_product: int
+    quantity: int
+
+
 class SaleRegister(BaseModel):
     sale_number: str
     client_id: int  
@@ -13,6 +18,7 @@ class SaleRegister(BaseModel):
     cash_received: Decimal
     change_given: Decimal
     created_at: datetime.datetime
+    products: list[ProductSale]
 
 class SaleResponse(BaseModel):
     id_sale: int
