@@ -27,7 +27,9 @@ def login(user: Login, db: Session = Depends(get_db)):
     if not user_found:
         raise HTTPException(status_code=401, detail="Credenciales incorrectas")
 
-    # Crear token con info básica
+    # create JWT token
+    if not verify_password(user.password, user_found.password):
+        raise HTTPException(status_code=401, detail="Credenciales incorrectas")
     token_data = {
         "id_user": user_found.id_user,
         "email": user_found.email
