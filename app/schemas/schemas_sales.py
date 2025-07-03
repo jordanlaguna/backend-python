@@ -4,7 +4,7 @@ from decimal import Decimal
 
 class ProductSale(BaseModel):
     id_product: int
-    quantity: int
+    stock: int
 
 
 class SaleRegister(BaseModel):

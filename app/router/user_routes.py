@@ -4,6 +4,7 @@ from app.database.database import SessionLocal
 from app.schemas.schemas_user import Login, UserCreate, UserUpdate, UserResponse
 from app.services import crud_user
 from app.utils.security import verify_password
+from app.utils.jwt_handler import create_access_token
 
 router = APIRouter()
 
@@ -20,13 +21,24 @@ def get_db():
 def read_users(db: Session = Depends(get_db)):
     return crud_user.get_users(db)
 
-#Login
 @router.post("/login")
 def login(user: Login, db: Session = Depends(get_db)):
     user_found = crud_user.authenticate_user(db, user.email, user.password)
     if not user_found:
         raise HTTPException(status_code=401, detail="Credenciales incorrectas")
-    return {"message": "Login exitoso", "user_id": user_found.id_user}
+
+    # Crear token con info básica
+    token_data = {
+        "id_user": user_found.id_user,
+        "email": user_found.email
+    }
+    token = create_access_token(data=token_data)
+
+    return {
+        "access_token": token,
+        "token_type": "bearer",
+        "user_id": user_found.id_user
+    }
 
 # Get a user by ID
 @router.get("/{user_id}", response_model=UserResponse)
