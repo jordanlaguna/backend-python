@@ -2,7 +2,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database.database import SessionLocal
-from app.schemas.schemas_person import PersonRegister, PersonRegisterSuccess, PersonResponse, PersonUserInformation
+from app.schemas.schemas_person import PersonRegister, PersonRegisterSuccess, PersonResponse, PersonUserInformation, UpdatePersonResponse, UpdatePerson
 from app.services import crud_person
 from app.models.model_person import Person
 from app.models.model_user import User
@@ -60,3 +60,19 @@ def get_all_persons(db: Session = Depends(get_db)):
             )
         )
     return result
+
+# Update a person by ID
+@router.put("/update/{id_person}", response_model=UpdatePersonResponse)
+def update_person(id_person: int, person: UpdatePerson, db: Session = Depends(get_db)):
+
+    # Verify if the person exists
+    existing_person = db.query(Person).filter(Person.id_person == id_person).first()
+    if not existing_person:
+        raise HTTPException(status_code=404, detail="Persona no encontrada.")
+
+    # Update person information
+    updated_person = crud_person.update_person_information(db=db, id_person=id_person, person_data=person.dict())
+    if not updated_person:
+        raise HTTPException(status_code=400, detail="Error al actualizar la persona.")
+
+    return updated_person

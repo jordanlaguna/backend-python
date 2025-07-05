@@ -13,6 +13,16 @@ class ClientRegister(BaseModel):
     address: str | None = None
     register_date: str | None = None
 
+class ClientUpdate(BaseModel):
+    identification: str | None = None
+    name: str | None = None
+    last_name: str | None = None
+    second_name: str | None = None
+    email: str | None = None
+    telephone: int | None = None
+    address: str | None = None
+    register_date: str | None = None
+    
 class ClientResponse(BaseModel):
     id_client: int
     identification: str
@@ -49,3 +59,6 @@ class ClientUserInformation(BaseModel):
     model_config = {
         "from_attributes": True
     }
+class UpdateClientResponse(BaseModel):
+    message: str
+    id_client: int

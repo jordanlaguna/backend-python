@@ -28,6 +28,14 @@ class PersonUserInformation(BaseModel):
         "from_attributes": True
     }
 
+class UpdatePerson(BaseModel):
+    birth_date: str | None = None
+    identification: str | None = None
+    name: str | None = None
+    lastName: str | None = None
+    secondName: str | None = None
+    telephone: str | None = None
+    email: str | None = None
 class PersonResponse(BaseModel):
     id_person: int
     birth_date: str
@@ -41,6 +49,10 @@ class PersonResponse(BaseModel):
     model_config = {
         "from_attributes": True
     }
+
+class UpdatePersonResponse(BaseModel):
+    message: str
+    id_person: int
 
 class PersonRegisterSuccess(BaseModel):
     message: str

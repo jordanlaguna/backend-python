@@ -26,3 +26,26 @@ def create_client(db: Session, client: ClientRegister):
 def get_all_clients_information(db: Session):
     # Retrieve all clients from the database
     return db.query(Client).all()
+
+# Update client information
+def update_client_information(db: Session, id_client: int, client_data: dict):
+    db_client = db.query(Client).filter(Client.id_client == id_client).first()
+
+    if not db_client:
+        return None
+
+    for key, value in client_data.items():
+        if value is not None:
+            # Update fields in Client
+            if hasattr(db_client, key):
+                setattr(db_client, key, value)
+            else:
+                raise ValueError(f"Unknown field: {key}")
+
+    db.commit()
+    db.refresh(db_client)
+
+    return {
+        "message": "Client information updated successfully",
+        "id_client": db_client.id_client
+    }

@@ -72,3 +72,11 @@ def create_sale(db: Session, sale: SaleRegister):
     except SQLAlchemyError as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Error en base de datos: {str(e)}")
+
+# Get all sales
+def get_all_sales(db: Session):
+    try:
+        sales = db.query(Sale).all()
+        return sales
+    except SQLAlchemyError as e:
+        raise HTTPException(status_code=500, detail=f"Error en base de datos: {str(e)}")

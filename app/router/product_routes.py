@@ -58,3 +58,8 @@ def get_product_by_barcode(name: str, db: Session = Depends(get_db)):
     if not product:
         raise HTTPException(status_code=404, detail="Producto no encontrado")
     return product
+# Search products by name dynamically
+@router.get("/search/{name}", response_model=List[ProductResponse])
+def search_products_by_name(name: str, db: Session = Depends(get_db)):
+    products = db.query(Product).filter(Product.name.ilike(f"%{name}%")).all()
+    return products

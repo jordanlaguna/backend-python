@@ -11,26 +11,42 @@ class SaleRegister(BaseModel):
     sale_number: str
     client_id: int  
     user_id: int
-    total: Decimal
-    subtotal: Decimal
-    tax: Decimal    
+    total: float
+    subtotal: float
+    tax: float
     payment_method: str
-    cash_received: Decimal
-    change_given: Decimal
+    cash_received: float
+    change_given: float
     created_at: datetime.datetime
     products: list[ProductSale]
 
+class SalesList(BaseModel):
+    id: int
+    sale_number: str
+    client_id: int  
+    user_id: int
+    total: float
+    subtotal: float
+    tax: float
+    payment_method: str
+    cash_received: float
+    change_given: float
+    created_at: datetime.datetime
+
+    model_config = {
+        "from_attributes": True
+    }
 class SaleResponse(BaseModel):
     id_sale: int
     sale_number: str
     client_id: int  
     user_id: int
-    total: Decimal
-    subtotal: Decimal
-    tax: Decimal
+    total: float
+    subtotal: float
+    tax: float
     payment_method: str
-    cash_received: Decimal
-    change_given: Decimal
+    cash_received: float
+    change_given: float
     created_at: datetime.datetime
 
     model_config = {
