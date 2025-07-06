@@ -2,7 +2,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database.database import SessionLocal
-from app.schemas.schemas_product import ProductRegister, ProductResponse, ProdcutRegisterSuccess
+from app.schemas.schemas_product import ProductRegister, ProductResponse, ProdcutRegisterSuccess, ProductUpdate, ProductUpdateResponse
 from app.services import crud_product
 from app.models.model_product import Product
 
@@ -63,3 +63,21 @@ def get_product_by_barcode(name: str, db: Session = Depends(get_db)):
 def search_products_by_name(name: str, db: Session = Depends(get_db)):
     products = db.query(Product).filter(Product.name.ilike(f"%{name}%")).all()
     return products
+
+# Update product information
+@router.put("/update_product/{id_product}", response_model=ProductUpdateResponse)
+def update_product(id_product: int, product_data: ProductUpdate, db: Session = Depends(get_db)):
+    existing_product = db.query(Product).filter(Product.id_product == id_product).first()
+    if not existing_product:
+        raise HTTPException(status_code=404, detail="Producto no encontrado.")
+    
+    updated_product = crud_product.update_product_information(
+        db=db,
+        id_product=id_product,
+        product_data=product_data.dict()
+    )
+
+    if not updated_product:
+        raise HTTPException(status_code=400, detail="Error al actualizar la información del producto.")
+    
+    return updated_product

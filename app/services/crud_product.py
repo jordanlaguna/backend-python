@@ -35,3 +35,22 @@ def get_all_products(db: Session):
 # Get a product by barcode
 def get_product_by_barcode(db: Session, name: str) -> Product | None:
     return db.query(Product).filter(Product.name == name).first()
+
+# Update product information
+def update_product_information(db: Session, id_product: int, product_data: dict):
+    db_product = db.query(Product).filter(Product.id_product == id_product).first()
+    if not db_product:
+        return None
+    for  key, value in product_data.items():
+        if value is not None:
+            # Update fields in Product
+            if hasattr(db_product, key):
+                setattr(db_product, key, value)
+            else:
+                raise ValueError(f"Unknown field: {key}")
+    db.commit()
+    db.refresh(db_product)
+    return {
+        "message": "Información del producto actualizada exitosamente",
+        "id_product": db_product.id_product
+    }
