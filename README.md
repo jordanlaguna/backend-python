@@ -29,7 +29,7 @@ Este proyecto es un backend desarrollado con **FastAPI** y **MySQL**, diseñado 
 ### 1. Clona el repositorio
 
 ```bash
-git clone https://github.com/tuusuario/tu-backend.git
+git clone https://github.com/jordanlaguna/backend-python.git
 cd tu-backend
 ```
 
