@@ -193,9 +193,7 @@ Además, el frontend guarda el token JWT en memoria y lo utiliza para acceder a 
 ## 🛠️ Próximas mejoras
 
 - Protección de rutas con verificación de token
-- CRUD completo para categorías
-- Registro de clientes y cuentas por cobrar
-- Reportes de facturación
+- Reportes de facturación reales
 
 ---
 
