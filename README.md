@@ -29,7 +29,7 @@ Este proyecto es un backend desarrollado con **FastAPI** y **MySQL**, diseñado 
 ### 1. Clona el repositorio
 
 ```bash
-git clone https://github.com/tuusuario/tu-backend.git
+git clone https://github.com/jordanlaguna/backend-python.git
 cd tu-backend
 ```
 
@@ -193,9 +193,7 @@ Además, el frontend guarda el token JWT en memoria y lo utiliza para acceder a 
 ## 🛠️ Próximas mejoras
 
 - Protección de rutas con verificación de token
-- CRUD completo para categorías
-- Registro de clientes y cuentas por cobrar
-- Reportes de facturación
+- Reportes de facturación reales
 
 ---
 
