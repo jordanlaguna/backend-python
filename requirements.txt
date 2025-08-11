@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+sqlalchemy
+pymysql
+cryptography
+python-dotenv
+passlib[bcrypt]
+python-jose[cryptography]
+reportlab
+
